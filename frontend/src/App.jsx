@@ -1,15 +1,17 @@
 import { Outlet } from "react-router-dom"
 import Header from "./components/Header"
-
-import {Container} from 'react-bootstrap'
+import { ComerceProvider } from "./context/comerceContext"
+import { Container } from 'react-bootstrap'
 function App() {
 
   return (
     <>
-    <Header/>
-    <Container>
-    <Outlet/>
-    </Container>
+      <ComerceProvider>
+        <Header />
+        <Container>
+          <Outlet />
+        </Container>
+      </ComerceProvider>
     </>
   )
 }

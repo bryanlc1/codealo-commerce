@@ -5,7 +5,6 @@ import '../styles/Categories.css'
 const Categories = () => {
     const [categories,setCategories]= useState();
     const {selectedList, setSelectedList}= useComerce();
-    //const [selectedList, setSelectedList]=useState([]);
     
     useEffect(()=>{
         getCategories().then(resp=>setCategories(resp));
@@ -20,7 +19,7 @@ const Categories = () => {
         }
     }
 
-    return(
+        return(
         <section  className="contCategory">
         {categories?.map((category,indx) =>
          <button onClick={() => changeFilter(category,indx)} key={indx} className={selectedList.includes(category)?'category categorySelected ' : 'category '}>

@@ -12,3 +12,15 @@
     justify-content: center;
 
 }
+
+.cardCategories{
+    background-color: rgb(1 22 39);
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.contCardCategories{
+    display: flex;
+    justify-content: space-around;
+}

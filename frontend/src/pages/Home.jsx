@@ -35,7 +35,7 @@ const Home = () => {
 
     function createCardsProducts(item,indx) {
         return (
-            <CardProduct key={indx} title={item.title} price={item.price} image={item.image.url} categories={item.categories.map((cat)=>cat)}/>
+            <CardProduct key={indx} item={item}/>
         )
     }    
 

@@ -9,6 +9,7 @@ import Cart from './pages/Cart';
 import History from './pages/History';
 import Products from './pages/Products';
 import Login from './pages/Login';
+import Register from './pages/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css'
 
@@ -23,6 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="/cart" element={<Cart />} />
         <Route path="/history" element={<History/>}/>
         <Route path="/login" element={<Login/>}/>
+        <Route path="/register" element={<Register/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

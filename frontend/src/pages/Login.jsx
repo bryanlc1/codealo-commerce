@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Stack } from "react-bootstrap";
 
+import { loginUser } from "../services/User";
+import useComerce from "../hooks/useComerce";
 import '../styles/Login.css';
 
 const Login = () => {
@@ -9,11 +11,24 @@ const Login = () => {
     const [password, setPassword] = useState();
     const [email, setEmail] = useState();
 
+    const{user,setUser} = useComerce();
+
+    const sendUser = async () => {
+        const user = {
+            identifier:email,
+            password:password
+        }        
+    
+         const userLoged = await loginUser(user);
+         setUser(userLoged);
+         if(userLoged?.jwt) navigate('/')
+    }
+
     const handelsubmit = event => {
         event.preventDefault();
-
-        navigateTo("/")
+        sendUser();
     }
+    
 
     return (
         <section className="contLogin">
@@ -21,7 +36,7 @@ const Login = () => {
                 <h2>Incia Sesion</h2>
                 <Form onSubmit={handelsubmit}>
                     <Form.Group className="mb-3">
-                        <Form.Control className="inputForm" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
+                        <Form.Control className="inputForm" type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                     </Form.Group>
 
                     <Form.Group className="mb-3">

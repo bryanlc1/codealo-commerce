@@ -1,9 +1,17 @@
 import { useNavigate } from "react-router-dom"
 import { Nav, Navbar, Container } from 'react-bootstrap'
 import { useState } from 'react';
+
+import useComerce from "../hooks/useComerce";
 const Header = () => {
     const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);
+
+    const { user, setUser } = useComerce();
+
+    const logout = () => {
+        setUser({})
+    }
     return (
         <>
             <Navbar expanded={expanded ? 'false' : null} onToggle={setExpanded} bg="light" expand="lg">
@@ -21,9 +29,15 @@ const Header = () => {
                             <Nav.Link onClick={() => { setExpanded(false); navigate('/') }} >Inicio</Nav.Link>
                             <Nav.Link onClick={() => { setExpanded(false); navigate('/products') }} >Productos</Nav.Link>
                         </Nav>
-                        <Nav>
-                            <Nav.Link onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
-                        </Nav>
+                        {user.jwt ?
+                            <Nav>
+                                <Nav.Link onClick={() =>{logout();setExpanded(false)}}>Logout</Nav.Link>
+                            </Nav>
+                            :
+                            <Nav>
+                                <Nav.Link onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
+                            </Nav>
+                        }
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

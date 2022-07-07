@@ -2,6 +2,8 @@ import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, Stack } from "react-bootstrap";
 
+import { registerUser } from "../services/User";
+import useComerce from "../hooks/useComerce";
 import '../styles/Login.css';
 
 const Register = () => {
@@ -10,11 +12,26 @@ const Register = () => {
     const [email, setEmail] = useState();
     const [userName, setUserName] = useState();
 
+    const {user,setUser}= useComerce();
+
+    const sendUser = async () => {
+        const user = {
+            username:userName,
+            email:email,
+            password:password
+        }
+        
+         const userRegister = await registerUser(user);
+         setUser(userRegister)
+         if(userRegister?.jwt) navigate('/')
+    }
+
     const handelsubmit = event => {
         event.preventDefault();
-
-        navigateTo("/")
+        sendUser();
     }
+
+    console.log(user)
 
     return (
         <section className="contLogin">
@@ -33,10 +50,7 @@ const Register = () => {
                     </Form.Group>
 
                     <Stack gap={2} className="contButonsLogin">
-                        <button type="submit" className="btonlogin">
-                            Iniciar sesion
-                        </button>
-                        <button className="btonlogin" onClick={() => navigate("/register")}>
+                        <button className="btonlogin">
                             Registrate
                         </button>
                     </Stack>

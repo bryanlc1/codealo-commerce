@@ -10,7 +10,7 @@ import useComerce from "../hooks/useComerce";
 import '../styles/Home.css'
 const Home = () => {
     const [products, setProducts] = useState([]);
-    const [vewMore, setVewMore] = useState(true);
+    const [vewMore, setVewMore] = useState(false);
     const [filteredList,setFilteredList]=useState([]);
 
     const {selectedList}= useComerce();

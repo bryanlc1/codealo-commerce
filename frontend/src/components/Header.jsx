@@ -3,6 +3,9 @@ import { Nav, Navbar, Container } from 'react-bootstrap'
 import { useState } from 'react';
 
 import useComerce from "../hooks/useComerce";
+
+import {FaCartPlus} from "react-icons/fa";
+import '../styles/header.css';
 const Header = () => {
     const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);
@@ -30,12 +33,18 @@ const Header = () => {
                             <Nav.Link onClick={() => { setExpanded(false); navigate('/products') }} >Productos</Nav.Link>
                         </Nav>
                         {user.jwt ?
-                            <Nav>
-                                <Nav.Link onClick={() =>{logout();setExpanded(false)}}>Logout</Nav.Link>
+                            <Nav style={{
+                                alignItems: "center",
+                              }}>
+                                <Nav.Link className="btonLogin" onClick={() =>{logout();setExpanded(false)}}>Logout</Nav.Link>
+                                <FaCartPlus/>
                             </Nav>
                             :
-                            <Nav>
-                                <Nav.Link onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
+                            <Nav  style={{
+                                alignItems: "center",
+                              }}>
+                                <Nav.Link className="btonLogin" onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
+                                <FaCartPlus/>
                             </Nav>
                         }
                     </Navbar.Collapse>

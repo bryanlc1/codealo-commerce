@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 import { Button, Form, Stack } from "react-bootstrap";
 
 import { loginUser } from "../services/User";
@@ -20,8 +21,10 @@ const Login = () => {
         }        
     
          const userLoged = await loginUser(user);
+         console.log(userLoged);
          setUser(userLoged);
          if(userLoged?.jwt) navigate('/')
+         if(userLoged?.statusCode===400) toast.error(userLoged?.message[0].messages[0].message)
     }
 
     const handelsubmit = event => {
@@ -31,6 +34,8 @@ const Login = () => {
     
 
     return (
+       <>
+        <ToastContainer autoClose={1500} />
         <section className="contLogin">
             <div className="login">
                 <h2>Incia Sesion</h2>
@@ -55,6 +60,7 @@ const Login = () => {
             </div>
 
         </section>
+       </>
     )
 }
 

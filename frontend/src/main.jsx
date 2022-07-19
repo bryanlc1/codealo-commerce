@@ -7,10 +7,10 @@ import App from './App';
 import Detail from './pages/Detail';
 import Cart from './pages/Cart';
 import History from './pages/History';
-import Products from './pages/Products';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -19,7 +19,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App />}>
         <Route index element={<Home />} />
-        <Route path="/products" element={<Products />} />
         <Route path="/detail" element={<Detail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/history" element={<History/>}/>

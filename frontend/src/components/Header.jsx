@@ -16,7 +16,7 @@ const Header = () => {
         setUser({})
     }
 
-    const totalItems = cart.map(item=>item.amount).reduce((prev, curr) => prev + curr, 0)
+    const totalItems = cart.map(item=>item.amount).reduce((prev,current)=>prev+current,0)
     return (
         <>
             <Navbar expanded={expanded ? 'false' : null} onToggle={setExpanded} bg="light" expand="lg">
@@ -24,6 +24,10 @@ const Header = () => {
                     <Navbar.Brand onClick={() => navigate('/')}>
                         <img src="src/assets/codealo.png" width="30" height="30" className="d-inline-block align-top" />{' '}
                         Codealo-comerce
+                    </Navbar.Brand>
+                    <Navbar.Brand className="shoppingCart" onClick={() => {navigate('/cart') }}>
+                                    <FaCartPlus />
+                                    {cart.length !==0 ? <span className="itemsCart">{totalItems}</span>:null}
                     </Navbar.Brand>
                     <Navbar.Toggle expanded={expanded ? 'false' : null} />
                     <Navbar.Collapse id="responsive-navbar-nav">
@@ -34,23 +38,17 @@ const Header = () => {
                             <Nav.Link onClick={() => { setExpanded(false); navigate('/') }} >Inicio</Nav.Link>
                             <Nav.Link onClick={() => { setExpanded(false); navigate('/products') }} >Productos</Nav.Link>
                         </Nav>
+                        
                         {user.jwt ?
-                            <Nav style={{
-                                alignItems: "center",
-                              }}>
+                            <Nav >
                                 <Nav.Link className="btonLogin" onClick={() =>{logout();setExpanded(false)}}>Logout</Nav.Link>
-                                <FaCartPlus/>
                             </Nav>
                             :
-                            <Nav  style={{
-                                alignItems: "center",
-                              }}>
+                            <>
+                            <Nav>
                                 <Nav.Link className="btonLogin" onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
-                                <div className="shoppingCart" onClick={() => navigate('/cart')}>
-                                <FaCartPlus />
-                                {cart.length !==0 ? <span className="itemsCart">{totalItems}</span>:null}
-                                </div>
                             </Nav>
+                            </>
                         }
                     </Navbar.Collapse>
                 </Container>

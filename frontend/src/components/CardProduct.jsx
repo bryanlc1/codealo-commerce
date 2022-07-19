@@ -5,7 +5,17 @@ const CardProduct = ({ item }) => {
     const {cart,setCart} = useComerce();
     
     const addCart = (item) => {
-        setCart([...cart,item]);
+        let newCart=[];
+        const check = cart.some(element => element.id === item.id);
+        console.log(check);
+        if(check){
+             const newCart = cart.map(element => element.id === item.id ? {...element,amount:element.amount+1}:element);
+             setCart(newCart);
+        }else{
+            item.amount = 1;
+            setCart([...cart,item]);
+        }
+       
     }
     console.log(cart);
     return (

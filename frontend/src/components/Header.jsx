@@ -15,6 +15,8 @@ const Header = () => {
     const logout = () => {
         setUser({})
     }
+
+    const totalItems = cart.map(item=>item.amount).reduce((prev, curr) => prev + curr, 0)
     return (
         <>
             <Navbar expanded={expanded ? 'false' : null} onToggle={setExpanded} bg="light" expand="lg">
@@ -44,9 +46,9 @@ const Header = () => {
                                 alignItems: "center",
                               }}>
                                 <Nav.Link className="btonLogin" onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
-                                <div className="shoppingCart">
-                                <FaCartPlus/>
-                                {cart.length !==0 ? <span className="itemsCart">{cart.length}</span>:null}
+                                <div className="shoppingCart" onClick={() => navigate('/cart')}>
+                                <FaCartPlus />
+                                {cart.length !==0 ? <span className="itemsCart">{totalItems}</span>:null}
                                 </div>
                             </Nav>
                         }

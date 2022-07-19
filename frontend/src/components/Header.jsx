@@ -5,12 +5,12 @@ import { useState } from 'react';
 import useComerce from "../hooks/useComerce";
 
 import {FaCartPlus} from "react-icons/fa";
-import '../styles/header.css';
+import '../styles/Header.css';
 const Header = () => {
     const navigate = useNavigate();
     const [expanded, setExpanded] = useState(false);
 
-    const { user, setUser } = useComerce();
+    const { user, setUser,cart} = useComerce();
 
     const logout = () => {
         setUser({})
@@ -44,7 +44,10 @@ const Header = () => {
                                 alignItems: "center",
                               }}>
                                 <Nav.Link className="btonLogin" onClick={() => { setExpanded(false); navigate('/login') }}>Login</Nav.Link>
+                                <div className="shoppingCart">
                                 <FaCartPlus/>
+                                {cart.length !==0 ? <span className="itemsCart">{cart.length}</span>:null}
+                                </div>
                             </Nav>
                         }
                     </Navbar.Collapse>

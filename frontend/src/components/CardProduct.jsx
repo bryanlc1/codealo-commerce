@@ -1,6 +1,13 @@
+import useComerce from "../hooks/useComerce";
 import { Card, Stack } from "react-bootstrap";
 import '../styles/CardProduct.css'
 const CardProduct = ({ item }) => {
+    const {cart,setCart} = useComerce();
+    
+    const addCart = (item) => {
+        setCart([...cart,item]);
+    }
+    console.log(cart);
     return (
         <>
             <Card className="cardProduct text-center" style={{ width: '18rem' }}>
@@ -21,7 +28,7 @@ const CardProduct = ({ item }) => {
                         <span className="price">{item.price} $</span>
                     </Card.Text>
                     <Stack gap={2}>
-                        <button className="btnCard">Añadir al carrito</button>
+                        <button className="btnCard" onClick={()=>addCart(item)}>Añadir al carrito</button>
                         <button className="btnCard">Ver mas</button>
                     </Stack>
                 </Card.Body>
